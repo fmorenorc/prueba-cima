@@ -3,55 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buscador CIMA</title>
+    <meta
+      name="description"
+      content="Herramienta profesional para la consulta rápida de medicamentos autorizados en España mediante la API oficial de CIMA."
+    />
+    <title>Buscador de medicamentos (CIMA)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="container">
-      <header>
-        <h1>Buscador de medicamentos CIMA</h1>
-        <p>
-          Consulta medicamentos por principio activo, nombre comercial o código
-          ATC y accede a ficha técnica y prospecto.
-        </p>
+    <main class="page" aria-labelledby="main-title">
+      <header class="hero">
+        <h1 id="main-title">Buscador de medicamentos (CIMA)</h1>
+        <p class="subtitle">Consulta rápida de medicamentos autorizados en España</p>
       </header>
 
-      <section class="search-card">
-        <form id="search-form" autocomplete="off">
-          <div class="field-grid">
-            <label>
-              Tipo de búsqueda
+      <section class="search-panel" aria-label="Formulario de búsqueda de medicamentos">
+        <form id="search-form" class="search-form" autocomplete="off">
+          <div class="search-controls">
+            <div class="form-field">
+              <label for="search-type">Tipo de búsqueda</label>
               <select id="search-type" required>
                 <option value="nombre">Nombre comercial</option>
                 <option value="principioActivo">Principio activo</option>
                 <option value="atc">Código ATC</option>
               </select>
-            </label>
+            </div>
 
-            <label>
-              Valor
+            <div class="form-field grow">
+              <label for="search-value">Término de búsqueda</label>
               <input
                 id="search-value"
                 name="search"
                 type="text"
                 list="search-suggestions"
-                placeholder="Escribe para buscar"
+                placeholder="Ejemplo: Paracetamol, Omeprazol, N02BE01"
                 minlength="2"
                 required
+                aria-describedby="search-help"
               />
+              <small id="search-help">
+                Escribe al menos 2 caracteres para activar el autocompletado.
+              </small>
               <datalist id="search-suggestions"></datalist>
-            </label>
+            </div>
           </div>
 
           <button id="search-button" type="submit">Buscar</button>
         </form>
       </section>
 
-      <section>
-        <p id="status" role="status" aria-live="polite"></p>
-        <div id="results" class="results"></div>
+      <section class="results-section" aria-label="Resultados de búsqueda">
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <div id="results" class="results" aria-live="polite"></div>
       </section>
     </main>
+
+    <footer class="footer">
+      <p>
+        Datos procedentes del Centro de Información online de Medicamentos de la
+        Agencia Española de Medicamentos y Productos Sanitarios (CIMA).
+      </p>
+    </footer>
 
     <template id="medicine-card-template">
       <article class="medicine-card">

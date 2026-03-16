@@ -1,12 +1,13 @@
 :root {
   color-scheme: light;
-  --bg: #f3f6fb;
-  --card: #ffffff;
-  --text: #1f2a37;
-  --muted: #596579;
-  --accent: #0f6cbd;
-  --accent-hover: #0b5a9d;
-  --border: #d5deea;
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --text: #162033;
+  --muted: #4d5c75;
+  --primary: #1565c0;
+  --primary-hover: #0f4f98;
+  --border: #dbe3ef;
+  --shadow: 0 10px 30px rgba(16, 38, 67, 0.08);
 }
 
 * {
@@ -18,43 +19,55 @@ body {
   font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background: var(--bg);
   color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.container {
-  max-width: 980px;
+.page {
+  width: min(980px, calc(100% - 2rem));
   margin: 0 auto;
-  padding: 2rem 1rem 3rem;
+  padding: 3.5rem 0 2rem;
 }
 
-header h1 {
-  margin-bottom: 0.4rem;
+.hero {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-header p {
-  margin-top: 0;
+.hero h1 {
+  margin: 0;
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem);
+}
+
+.subtitle {
+  margin-top: 0.6rem;
   color: var(--muted);
+  font-size: 1.02rem;
 }
 
-.search-card {
-  background: var(--card);
+.search-panel {
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 6px 20px rgba(15, 38, 70, 0.06);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.2rem;
 }
 
-.field-grid {
+.search-controls {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: minmax(210px, 0.9fr) 1.8fr;
   gap: 1rem;
-  align-items: end;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
 }
 
 label {
-  display: flex;
-  flex-direction: column;
   font-weight: 600;
-  gap: 0.4rem;
 }
 
 select,
@@ -66,53 +79,82 @@ button {
 select,
 input {
   width: 100%;
-  padding: 0.65rem 0.7rem;
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
+  padding: 0.8rem 0.85rem;
+  color: var(--text);
+  background: #fff;
+}
+
+input {
+  font-size: 1.04rem;
+}
+
+input:focus,
+select:focus,
+button:focus-visible,
+.doc-link:focus-visible {
+  outline: 3px solid rgba(21, 101, 192, 0.25);
+  outline-offset: 1px;
+}
+
+small {
+  color: var(--muted);
 }
 
 button {
   margin-top: 1rem;
-  background: var(--accent);
-  border: none;
+  border: 0;
+  border-radius: 10px;
+  background: var(--primary);
   color: #fff;
-  padding: 0.72rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 0.8rem 1.1rem;
   font-weight: 700;
+  cursor: pointer;
 }
 
 button:hover {
-  background: var(--accent-hover);
+  background: var(--primary-hover);
 }
 
-#status {
-  min-height: 1.3rem;
-  margin: 1rem 0;
+button[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.results-section {
+  margin-top: 1.2rem;
+}
+
+.status {
+  min-height: 1.5rem;
+  margin: 0.6rem 0 1rem;
   color: var(--muted);
+  font-weight: 500;
 }
 
 .results {
   display: grid;
-  gap: 1rem;
+  gap: 0.95rem;
 }
 
 .medicine-card {
-  background: var(--card);
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 1rem;
+  box-shadow: 0 5px 14px rgba(16, 38, 67, 0.06);
 }
 
-.medicine-card h2 {
+.medicine-name {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.08rem;
 }
 
 .medicine-meta {
   display: grid;
   grid-template-columns: max-content 1fr;
-  gap: 0.4rem 0.8rem;
+  gap: 0.45rem 0.8rem;
   margin-top: 0.8rem;
 }
 
@@ -125,23 +167,54 @@ button:hover {
 }
 
 .docs {
-  margin-top: 0.9rem;
+  margin-top: 0.95rem;
   display: flex;
+  gap: 0.55rem;
   flex-wrap: wrap;
-  gap: 0.5rem;
 }
 
 .doc-link {
   text-decoration: none;
-  background: #e8f0fa;
-  color: #073f73;
-  padding: 0.45rem 0.65rem;
-  border-radius: 8px;
   font-weight: 600;
+  color: #0b3f76;
+  background: #e9f1fb;
+  border: 1px solid #c9ddf6;
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
 }
 
-@media (max-width: 768px) {
-  .field-grid {
+.empty-state {
+  padding: 1rem;
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+}
+
+.footer {
+  margin-top: auto;
+  background: #eef3f9;
+  border-top: 1px solid #d6e1ef;
+}
+
+.footer p {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 1rem 0;
+  color: #2f4768;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding-top: 2rem;
+  }
+
+  .search-controls {
     grid-template-columns: 1fr;
+  }
+
+  button {
+    width: 100%;
   }
 }
