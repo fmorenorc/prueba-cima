@@ -1,0 +1,147 @@
+:root {
+  color-scheme: light;
+  --bg: #f3f6fb;
+  --card: #ffffff;
+  --text: #1f2a37;
+  --muted: #596579;
+  --accent: #0f6cbd;
+  --accent-hover: #0b5a9d;
+  --border: #d5deea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+header h1 {
+  margin-bottom: 0.4rem;
+}
+
+header p {
+  margin-top: 0;
+  color: var(--muted);
+}
+
+.search-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(15, 38, 70, 0.06);
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  align-items: end;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  gap: 0.4rem;
+}
+
+select,
+input,
+button {
+  font: inherit;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 0.65rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+button {
+  margin-top: 1rem;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.72rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: var(--accent-hover);
+}
+
+#status {
+  min-height: 1.3rem;
+  margin: 1rem 0;
+  color: var(--muted);
+}
+
+.results {
+  display: grid;
+  gap: 1rem;
+}
+
+.medicine-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.medicine-card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.medicine-meta {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.4rem 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.medicine-meta dt {
+  font-weight: 700;
+}
+
+.medicine-meta dd {
+  margin: 0;
+}
+
+.docs {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.doc-link {
+  text-decoration: none;
+  background: #e8f0fa;
+  color: #073f73;
+  padding: 0.45rem 0.65rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
